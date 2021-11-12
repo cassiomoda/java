@@ -1,0 +1,19 @@
+package application;
+
+import java.util.Locale;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+		List<Pessoa> pessoas = new ArrayList<Pessoa>();
+		
+		System.out.println("Informe o numero de contibuintes: ");
+		Integer numCont = sc.nextInt();
+		
+		sc.close();
+	}
+
+}

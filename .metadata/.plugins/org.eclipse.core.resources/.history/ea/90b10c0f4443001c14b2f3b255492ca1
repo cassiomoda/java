@@ -1,0 +1,12 @@
+package entities;
+
+public abstract class Pessoa {
+	private String nome;
+	private Double rendaAnual;
+	
+	public Pessoa() {
+		super();
+	}
+	
+	
+}
