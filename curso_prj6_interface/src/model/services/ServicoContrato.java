@@ -1,6 +1,7 @@
 package model.services;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import model.entities.Contrato;
 import model.entities.Parcela;
@@ -21,14 +22,17 @@ public class ServicoContrato {
 		Double valorBaseParcela = contrato.getValorTotal() / qtdMeses;
 		
 		for (int mes = 1; mes <= qtdMeses; mes++) {
-			Calendar vencimento = Calendar.getInstance();
-			vencimento.setTime(contrato.getInicio());
-			vencimento.add(Calendar.MONTH, mes);
-			
 			Double totParcela = valorBaseParcela + servicoPagamento.calculaJurosParcela(valorBaseParcela, mes);
 			totParcela += servicoPagamento.taxaPagamento(totParcela);
 			
-			contrato.addParcela(new Parcela(vencimento.getTime(), totParcela));
+			contrato.addParcela(new Parcela(addMeses(contrato.getInicio(), mes), totParcela));
 		}
+	}
+	
+	private Date addMeses(Date data, Integer qtdMes) {
+		Calendar vencimento = Calendar.getInstance();
+		vencimento.setTime(data);
+		vencimento.add(Calendar.MONTH, qtdMes);
+		return vencimento.getTime();
 	}
 }
